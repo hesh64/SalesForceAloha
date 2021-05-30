@@ -41,7 +41,7 @@ class Preprocessing {
     return { type: CommandTypeToName.Install, name: values.shift() };
   };
 
-  remvoveCommand(values) {
+  removeCommand(values) {
     return { type: CommandTypeToName.Remove, name: values.shift() };
   };
 
@@ -61,7 +61,7 @@ class Preprocessing {
       return this.installCommand;
     }
     else if (name === CommandTypeToName.Remove) {
-      return this.remvoveCommand;
+      return this.removeCommand;
     }
     else if (name === CommandTypeToName.List) {
       return this.listCommand;
@@ -70,6 +70,7 @@ class Preprocessing {
       return this.endCommand;
     }
 
+    // no op
     return () => {
     };
   };
