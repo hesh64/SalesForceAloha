@@ -119,7 +119,7 @@ class DependencyManager {
     }
 
     if (this.graph.getVert(u).in.size) {
-      this.echo(`B is a dependency, ignoring command`);
+      this.echo(`${ u } is a dependency, ignoring command`);
       return;
     }
 

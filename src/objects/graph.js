@@ -48,9 +48,11 @@ class Graph {
 
       visited[u] = true;
       pre(this.vertices[u]);
+
       for (const edge of this.vertices[u][direction]) {
         helper(edge);
       }
+
       post(this.vertices[u]);
     };
     return helper(s);
@@ -76,7 +78,6 @@ class Graph {
         cb(_v);
       }
       else if (this.vertices[_v]) {
-        // console.log(v, this.vertices);
         for (const child of this.vertices[_v].out) {
           if (this.vertices[child].in.size === 1 && this.vertices[child].in.has(_v)) {
             stack.push([child, false]);
