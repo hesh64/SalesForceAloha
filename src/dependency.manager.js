@@ -135,10 +135,7 @@ class DependencyManager {
   chunk() {
     let curMin = 0;
     const c = [];
-    while (this.log.length) {
-      if (CommandTypeOrder[this.log[0].type] < curMin) {
-        break;
-      }
+    while (this.log.length && CommandTypeOrder[this.log[0].type] >= curMin) {
       curMin = Math.max(curMin, CommandTypeOrder[this.log[0].type]);
       c.push(this.log.shift());
     }
@@ -155,7 +152,6 @@ class DependencyManager {
         return;
       }
       success.push(x);
-      return true;
     });
 
     if (errors.length) {
@@ -177,8 +173,9 @@ class DependencyManager {
   processList(cmd) {
     const keys = Object.keys(this.installed);
     this.echo(cmd.type);
-    keys.sort((a, b) => this.installed[a] > this.installed[b])
-      .forEach(i => console.log(i));
+    keys
+      .sort((a, b) => this.installed[a] > this.installed[b])
+      .forEach(i => this.echo(i));
   }
 
   process(cmd) {
